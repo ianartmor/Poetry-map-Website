@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Poetry Post Mapping Project</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="site_libs/htmlwidgets-1.6.1/htmlwidgets.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="site_libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+<script src="site_libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="site_libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+<script src="site_libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="site_libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="site_libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+<script src="site_libs/leaflet-binding-2.2.0/leaflet.js"></script>
+<script src="site_libs/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script>
+<script src="site_libs/leaflet-providers-plugin-2.2.0/leaflet-providers-plugin.js"></script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Poetry Post Mapping Project</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./index.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html" rel="" target="">
+ <span class="menu-text">Submit a Poetry Post</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#poetry-post-mapping-project" id="toc-poetry-post-mapping-project" class="nav-link active" data-scroll-target="#poetry-post-mapping-project">Poetry Post Mapping Project</a></li>
+  <li><a href="#the-map" id="toc-the-map" class="nav-link" data-scroll-target="#the-map">The Map</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="poetry-post-mapping-project" class="level2">
+<h2 class="anchored" data-anchor-id="poetry-post-mapping-project">Poetry Post Mapping Project</h2>
+<p>Poetry posts are scattered throughout Portland where neighbors offer us little gifts through poetry: a moment to pause, breathe, and receive inspiration, peache, delight, a new perspective, a sense of connection. We believe poetry posts strengthen our neighborhoods and build community.</p>
+</section>
+<section id="the-map" class="level2">
+<h2 class="anchored" data-anchor-id="the-map">The Map</h2>
+<p>Below are the poetry posts we’ve identified so far.</p>
+<p>Last updated: November 2023</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="leaflet html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-9f042e6554333405e2ff" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-9f042e6554333405e2ff">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addMarkers","args":[[45.562938989868,45.564981994948,45.581481016977,45.561022006702,45.567487010531,45.571062017964,45.574240016553],[-122.697455977414,-122.692279984566,-122.697793013741,-122.687659041345,-122.684408958389,-122.69732999741,-122.684523036091],{"iconUrl":{"data":"data:image/png;base64,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","index":0},"iconWidth":30,"iconHeight":30},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,["2919 N Willamette Blvd, Portland OR 97217","5728 N Delaware Ave, Portland OR 97217","3021 N Watts St, Portland OR 97217","2006 N Emerson St, Portland OR 97217","6119 N Concord, Portland OR 97217","6644 N Villard, Portland OR 97217","7045 N Concord Ave, Portland OR 97217"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[45.561022006702,45.581481016977],"lng":[-122.697793013741,-122.684408958389]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

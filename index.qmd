@@ -1,0 +1,33 @@
+
+## Poetry Post Mapping Project
+
+Poetry posts are scattered throughout Portland where neighbors offer us little gifts through poetry: a moment to pause, breathe, and receive inspiration, peache, delight, a new perspective, a sense of connection. We believe poetry posts strengthen our neighborhoods and build community.
+
+
+## The Map
+
+Below are the poetry posts we've identified so far.
+
+Last updated: November 2023
+
+```{r, include = FALSE}
+library(tidyverse)
+library(sf)
+library(leaflet)
+library(googlesheets4)
+library(tidygeocoder)
+locations <- read_sheet("https://docs.google.com/spreadsheets/d/1aeXAja0M0s7ZNB7eLedvgWtjP32i0MZkA6nOaGjzh6w/edit?usp=sharing")
+
+geocoded_locs <- geocode(locations, address = `Address of Poetry Post`, method = 'arcgis')
+
+locs_sf <- st_as_sf(geocoded_locs, coords = c( "long", "lat"))
+st_crs(locs_sf) <- st_crs(4326)
+```
+
+```{r, echo = FALSE, message=FALSE}
+leaflet(locs_sf) %>%
+  addProviderTiles(provider = providers$CartoDB.Positron) %>%
+  addMarkers(icon = makeIcon("Fa-Team-Fontawesome-FontAwesome-Scroll.512.png", iconWidth = 30, iconHeight = 30),
+             label = ~`Address of Poetry Post`)
+```
+

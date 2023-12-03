@@ -6,9 +6,39 @@ Poetry posts are scattered throughout Portland where neighbors offer us little g
 
 ## The Map
 
-Below are the poetry posts we've identified so far.
+Below are the poetry posts we've identified so far. If you've found or built a post, [you can submit it here](https://forms.gle/egjDBjEq66V1x9hu9).
 
 Last updated: November 2023
+
+```{r, include = FALSE}
+# ADD EMAIL TO FORM -- for infrequent updates
+# OPT OUT?
+# PHOTO
+# Description: specific location (optional), anything else distinct 
+# Unique feature (optional)
+
+# LIST grouped by neighborhood
+# URL: poetrypostspdx.org
+# leaflet popup with description? photo option?
+
+# filter by neighborhood
+
+# put link to form above map
+# maximize leaflet map button
+
+# routing - pre computed by neighborhood?
+# poetry post resources - page - builders
+# for educators
+#1 map
+#2 form
+#3 resources
+#4 walks / for educators
+
+# Number of people within 10 minute walk of poetry - 1
+
+# street roots
+```
+
 
 ```{r, include = FALSE}
 library(tidyverse)
@@ -16,18 +46,62 @@ library(sf)
 library(leaflet)
 library(googlesheets4)
 library(tidygeocoder)
+library(leaflet.extras)
+library(crosstalk)
+library(DT)
 locations <- read_sheet("https://docs.google.com/spreadsheets/d/1aeXAja0M0s7ZNB7eLedvgWtjP32i0MZkA6nOaGjzh6w/edit?usp=sharing")
 
 geocoded_locs <- geocode(locations, address = `Address of Poetry Post`, method = 'arcgis')
-
+geocoded_locs <- filter(geocoded_locs, is.na(`Address of Poetry Post`)==FALSE)
 locs_sf <- st_as_sf(geocoded_locs, coords = c( "long", "lat"))
 st_crs(locs_sf) <- st_crs(4326)
+neighborhoods <- st_read("Data/Neighborhood_Boundaries/") %>% st_transform(st_crs(4326))
+labs <- st_centroid(neighborhoods)
+locs_sf <- locs_sf %>% st_join(neighborhoods) %>% select(`Address of Poetry Post`, Neighborhood = "MAPLABEL")
+
 ```
 
-```{r, echo = FALSE, message=FALSE}
-leaflet(locs_sf) %>%
-  addProviderTiles(provider = providers$CartoDB.Positron) %>%
-  addMarkers(icon = makeIcon("Fa-Team-Fontawesome-FontAwesome-Scroll.512.png", iconWidth = 30, iconHeight = 30),
-             label = ~`Address of Poetry Post`)
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+#filter_select("Neighborhood", "", sd, group= ~Neighborhood)
+your_map <- leaflet(locs_sf) %>%  
+  addProviderTiles(providers$OpenStreetMap) %>%
+  addMarkers(data= locs_sf,
+             icon = makeIcon("Fa-Team-Fontawesome-FontAwesome-Scroll.512.png", iconWidth = 19, iconHeight = 19),
+             label = ~`Address of Poetry Post`,
+             clusterOptions = markerClusterOptions()
+             )%>%
+    addPolygons(data= neighborhoods, fillOpacity =0, opacity = 0.4,weight=1, group  = "View Neighborhood Boundaries"
+                ) %>%
+  addControlGPS(
+      
+    options = gpsOptions(
+      position = "topleft",
+      activate = TRUE, 
+      autoCenter = TRUE,
+      setView = TRUE,
+      maxZoom=14
+      ))%>%
+    addFullscreenControl()%>%
+  addLayersControl(overlayGroups = "View Neighborhood Boundaries", options = layersControlOptions(collapsed=FALSE)) %>%
+  hideGroup("View Neighborhood Boundaries") %>%
+  activateGPS()
+your_map
+```
+
+## Print a list
+
+To print a list of poetry posts in your neighborhood, select your neighborhood and click the "print" button.
+```{r, echo =FALSE}
+
+sd <- SharedData$new(st_drop_geometry(locs_sf))
+filter_select("Neighborhood", "", sd, group= ~Neighborhood)
+
+sd %>%
+datatable( extensions = "Buttons", 
+          options = list(
+                dom = 'Bfrtip',
+            buttons = c("print", "excel")))
+
 ```
 

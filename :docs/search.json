@@ -1,12 +1,5 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "Submit a Poetry Post",
-    "section": "",
-    "text": "Use the form below to submit a poetry post!\n\nLoading…"
-  },
-  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Poetry Post Mapping Project",
@@ -33,5 +26,12 @@
     "title": "Poetry Post Mapping Project",
     "section": "Print a list",
     "text": "Print a list\nTo print a list of poetry posts in your neighborhood, select your neighborhood and click the “print” button."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "Submit a Poetry Post",
+    "section": "",
+    "text": "Use the form below to submit a poetry post!\n\nLoading…"
   }
 ]

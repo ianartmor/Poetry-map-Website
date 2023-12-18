@@ -1,0 +1,36 @@
+---
+title: "Print a list"
+editor: visual
+---
+
+```{r, include=FALSE}
+library(tidyverse)
+library(sf)
+library(leaflet)
+library(googlesheets4)
+library(tidygeocoder)
+library(leaflet.extras)
+library(crosstalk)
+library(DT)
+locs_sf <- readRDS("locs_sf.rds")
+
+```
+
+## Print a list of posts
+
+To print a list of poetry posts in your neighborhood, type your neighborhood(s) of interest into the box below and click the "print" button.
+
+```{r, echo=FALSE}
+
+
+sd <- SharedData$new(st_drop_geometry(locs_sf))
+filter_select("Neighborhood", "", sd, group= ~Neighborhood)
+
+sd %>%
+datatable( extensions = "Buttons", 
+          options = list(
+                dom = 'Bfrtip',
+            buttons = c("print", "excel")))
+
+
+```

@@ -8,7 +8,7 @@ Poetry posts are scattered throughout Portland where neighbors offer us little g
 
 Below are the poetry posts we've identified so far. If you've found or built a post, [you can submit it here](https://forms.gle/egjDBjEq66V1x9hu9).
 
-Last updated: November 2023
+Last updated: `r Sys.Date()`
 
 ```{r, include = FALSE}
 # ADD EMAIL TO FORM -- for infrequent updates
@@ -59,6 +59,7 @@ neighborhoods <- st_read("Data/Neighborhood_Boundaries/") %>% st_transform(st_cr
 labs <- st_centroid(neighborhoods)
 locs_sf <- locs_sf %>% st_join(neighborhoods) %>% select(`Address of Poetry Post`, Neighborhood = "MAPLABEL")
 
+saveRDS(locs_sf, "locs_sf.rds")
 ```
 
 
@@ -71,7 +72,7 @@ your_map <- leaflet(locs_sf) %>%
              label = ~`Address of Poetry Post`,
              clusterOptions = markerClusterOptions()
              )%>%
-    addPolygons(data= neighborhoods, fillOpacity =0, opacity = 0.4,weight=1, group  = "View Neighborhood Boundaries"
+    addPolygons(data= neighborhoods, fillOpacity =0, opacity = 0.4,weight=1.5, group  = "View Neighborhood Boundaries"
                 ) %>%
   addControlGPS(
       
@@ -89,19 +90,5 @@ your_map <- leaflet(locs_sf) %>%
 your_map
 ```
 
-## Print a list
 
-To print a list of poetry posts in your neighborhood, select your neighborhood and click the "print" button.
-```{r, echo =FALSE}
-
-sd <- SharedData$new(st_drop_geometry(locs_sf))
-filter_select("Neighborhood", "", sd, group= ~Neighborhood)
-
-sd %>%
-datatable( extensions = "Buttons", 
-          options = list(
-                dom = 'Bfrtip',
-            buttons = c("print", "excel")))
-
-```
 

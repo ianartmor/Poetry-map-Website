@@ -25,7 +25,7 @@
     "href": "index.html#the-map",
     "title": "Poetry Post Mapping Project",
     "section": "The Map",
-    "text": "The Map\nBelow are the poetry posts we’ve identified so far. If you’ve found or built a post, you can submit it here.\nLast updated: November 2023"
+    "text": "The Map\nBelow are the poetry posts we’ve identified so far. If you’ve found or built a post, you can submit it here.\nLast updated: 2023-12-17"
   },
   {
     "objectID": "index.html#print-a-list",
@@ -33,5 +33,19 @@
     "title": "Poetry Post Mapping Project",
     "section": "Print a list",
     "text": "Print a list\nTo print a list of poetry posts in your neighborhood, select your neighborhood and click the “print” button."
+  },
+  {
+    "objectID": "list_print.html",
+    "href": "list_print.html",
+    "title": "Print a list",
+    "section": "",
+    "text": "To print a list of poetry posts in your neighborhood, type your neighborhood(s) of interest into the box below and click the “print” button."
+  },
+  {
+    "objectID": "list_print.html#print-a-list-of-posts",
+    "href": "list_print.html#print-a-list-of-posts",
+    "title": "Print a list",
+    "section": "",
+    "text": "To print a list of poetry posts in your neighborhood, type your neighborhood(s) of interest into the box below and click the “print” button."
   }
 ]

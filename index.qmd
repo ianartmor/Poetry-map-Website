@@ -49,28 +49,57 @@ library(tidygeocoder)
 library(leaflet.extras)
 library(crosstalk)
 library(DT)
-locations <- read_sheet("https://docs.google.com/spreadsheets/d/1aeXAja0M0s7ZNB7eLedvgWtjP32i0MZkA6nOaGjzh6w/edit?usp=sharing")
+locations <- read_sheet("https://docs.google.com/spreadsheets/d/1aeXAja0M0s7ZNB7eLedvgWtjP32i0MZkA6nOaGjzh6w/edit?usp=sharing")  %>%
+  select(`Address of Poetry Post`, Verified)
 
-geocoded_locs <- geocode(locations, address = `Address of Poetry Post`, method = 'arcgis')
-geocoded_locs <- filter(geocoded_locs, is.na(`Address of Poetry Post`)==FALSE)
-locs_sf <- st_as_sf(geocoded_locs, coords = c( "long", "lat"))
-st_crs(locs_sf) <- st_crs(4326)
+locations_unverif <- read_sheet("https://docs.google.com/spreadsheets/d/1aeXAja0M0s7ZNB7eLedvgWtjP32i0MZkA6nOaGjzh6w/", range = "From Archive") %>% mutate("Address of Poetry Post" = paste(Address, city, "Oregon")) %>%
+  select(`Address of Poetry Post`, Verified)
+
+locations <- bind_rows(locations, locations_unverif) %>% 
+  mutate(Verified = case_when(Verified == TRUE ~ "Yes",
+                              TRUE ~ "No"
+                              ))
+
+#saveRDS(locations, "Data/loctemp.rds")
+
+
+
+#geocoded_locs <- geocode(locations, address = `Address of Poetry Post`, method = 'arcgis')
+#geocoded_locs <- filter(geocoded_locs, is.na(`Address of Poetry Post`)==FALSE)
+#locs_sf <- st_as_sf(geocoded_locs, coords = c( "long", "lat"))
+#st_crs(locs_sf) <- st_crs(4326)
+
 neighborhoods <- st_read("Data/Neighborhood_Boundaries/") %>% st_transform(st_crs(4326))
 labs <- st_centroid(neighborhoods)
-locs_sf <- locs_sf %>% st_join(neighborhoods) %>% select(`Address of Poetry Post`, Neighborhood = "MAPLABEL")
+locs_sf <- readRDS("locs_sf.rds") %>% unique()
 
-saveRDS(locs_sf, "locs_sf.rds")
+locs_sf <- locs_sf %>% st_join(neighborhoods) %>% select(`Address of Poetry Post`, Neighborhood = "MAPLABEL", Verified)
+
+locs_sf1 <- locs_sf %>% filter(Verified == "Yes")
+locs_sf2 <- locs_sf %>% filter(Verified=="No")
+
+sd <- SharedData$new(locs_sf1,  group = "Neighborhood")
+sd2 <- locs_sf2
+
+
 ```
 
 
+
 ```{r, echo = FALSE, message=FALSE, warning=FALSE}
-#filter_select("Neighborhood", "", sd, group= ~Neighborhood)
-your_map <- leaflet(locs_sf) %>%  
+filter_select("Neighborhood", "Filter by Neighborhood", sd, group = ~Neighborhood)
+
+your_map <- leaflet() %>%  
   addProviderTiles(providers$OpenStreetMap) %>%
-  addMarkers(data= locs_sf,
-             icon = makeIcon("Fa-Team-Fontawesome-FontAwesome-Scroll.512.png", iconWidth = 19, iconHeight = 19),
+  addMarkers(data= sd,
+             icon = makeIcon("Fa-Team-Fontawesome-FontAwesome-Scroll.512.png",
+                             iconWidth = 19, iconHeight = 19),
+             label = ~`Address of Poetry Post`
+             )%>%
+    addMarkers(data= sd2,
+             icon = makeIcon("question-circle-solid.png", iconWidth = 10, iconHeight = 10),
              label = ~`Address of Poetry Post`,
-             clusterOptions = markerClusterOptions()
+             group = "View Unverified Posts"
              )%>%
     addPolygons(data= neighborhoods, fillOpacity =0, opacity = 0.4,weight=1.5, group  = "View Neighborhood Boundaries"
                 ) %>%
@@ -84,8 +113,9 @@ your_map <- leaflet(locs_sf) %>%
       maxZoom=14
       ))%>%
     addFullscreenControl()%>%
-  addLayersControl(overlayGroups = "View Neighborhood Boundaries", options = layersControlOptions(collapsed=FALSE)) %>%
+  addLayersControl(overlayGroups = c("View Neighborhood Boundaries", "View Unverified Posts"), options = layersControlOptions(collapsed=FALSE)) %>%
   hideGroup("View Neighborhood Boundaries") %>%
+  hideGroup("View Unverified Posts") %>%
   activateGPS()
 your_map
 ```

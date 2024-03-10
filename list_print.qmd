@@ -1,5 +1,5 @@
 ---
-title: "Print a list"
+title: "Print a list of posts"
 editor: visual
 ---
 
@@ -12,15 +12,16 @@ library(tidygeocoder)
 library(leaflet.extras)
 library(crosstalk)
 library(DT)
-locs_sf <- readRDS("locs_sf.rds")
+locs_sf <- readRDS("locs_sf_verif.rds")
 
 ```
 
-## Print a list of posts
+## 
 
 To print a list of poetry posts in your neighborhood, type your neighborhood(s) of interest into the box below and click the "print" button.
 
 ```{r, echo=FALSE}
+
 
 
 sd <- SharedData$new(st_drop_geometry(locs_sf))

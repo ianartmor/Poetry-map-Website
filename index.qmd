@@ -1,8 +1,6 @@
-
 ## Poetry Post Mapping Project
 
 Poetry posts are scattered throughout Portland where neighbors offer us little gifts through poetry: a moment to pause, breathe, and receive inspiration, peace, delight, a new perspective, a sense of connection. We believe poetry posts strengthen our neighborhoods and build community.
-
 
 ## The Map
 
@@ -39,7 +37,6 @@ Last updated: `r Sys.Date()`
 # street roots
 ```
 
-
 ```{r, include = FALSE}
 library(tidyverse)
 library(sf)
@@ -52,7 +49,8 @@ library(DT)
 locations <- read_sheet("https://docs.google.com/spreadsheets/d/1aeXAja0M0s7ZNB7eLedvgWtjP32i0MZkA6nOaGjzh6w/edit?usp=sharing")  %>%
   select(`Address of Poetry Post`, Verified)
 
-locations_unverif <- read_sheet("https://docs.google.com/spreadsheets/d/1aeXAja0M0s7ZNB7eLedvgWtjP32i0MZkA6nOaGjzh6w/", range = "From Archive") %>% mutate("Address of Poetry Post" = paste(Address, city, "Oregon")) %>%
+locations_unverif <- read_sheet("https://docs.google.com/spreadsheets/d/1aeXAja0M0s7ZNB7eLedvgWtjP32i0MZkA6nOaGjzh6w/", range = "From Archive") %>% mutate("Address of Poetry Post" = paste(Address, city, "Oregon"))%>%
+filter(remove_from_map == FALSE & Verified == FALSE)%>%
   select(`Address of Poetry Post`, Verified)
 
 locations <- bind_rows(locations, locations_unverif) %>% 
@@ -66,30 +64,41 @@ locations <- bind_rows(locations, locations_unverif) %>%
 
 #geocoded_locs <- geocode(locations, address = `Address of Poetry Post`, method = 'arcgis')
 #geocoded_locs <- filter(geocoded_locs, is.na(`Address of Poetry Post`)==FALSE)
+#geocoded_locs <- dplyr::filter(geocoded_locs, is.na(long)==FALSE)
+
+
 #locs_sf <- st_as_sf(geocoded_locs, coords = c( "long", "lat"))
 #st_crs(locs_sf) <- st_crs(4326)
 
-neighborhoods <- st_read("Data/Neighborhood_Boundaries/") %>% st_transform(st_crs(4326))
-labs <- st_centroid(neighborhoods)
+#saveRDS(locs_sf, "locs_sf.rds")
+
 locs_sf <- readRDS("locs_sf.rds") %>% unique()
 
-locs_sf <- locs_sf %>% st_join(neighborhoods) %>% select(`Address of Poetry Post`, Neighborhood = "MAPLABEL", Verified)
+neighborhoods <- st_read("Data/Neighborhood_Boundaries/") %>% st_transform(st_crs(4326))
+labs <- st_centroid(neighborhoods)
+
+locs_sf <- locs_sf %>% 
+  st_join(neighborhoods) %>% 
+  select(`Address of Poetry Post`, Neighborhood = "MAPLABEL", Verified)
 
 locs_sf1 <- locs_sf %>% filter(Verified == "Yes")
 locs_sf2 <- locs_sf %>% filter(Verified=="No")
 
+saveRDS(locs_sf1, "locs_sf_verif.rds")
 sd <- SharedData$new(locs_sf1,  group = "Neighborhood")
 sd2 <- locs_sf2
+#sd2 <- SharedData$new(locs_sf2,  group = "Neighborhood")
 
 
 ```
-
-
 
 ```{r, echo = FALSE, message=FALSE, warning=FALSE}
 filter_select("Neighborhood", "Filter by Neighborhood", sd, group = ~Neighborhood)
 
 your_map <- leaflet() %>%  
+      setView(lng = -122.6784, lat = 45.5152, zoom = 11
+          ) %>%
+
   addProviderTiles(providers$OpenStreetMap) %>%
   addMarkers(data= sd,
              icon = makeIcon("Fa-Team-Fontawesome-FontAwesome-Scroll.512.png",
@@ -120,5 +129,4 @@ your_map <- leaflet() %>%
 your_map
 ```
 
-
-
+*We want to acknowledge the wonderful community members who have worked in the past to map poetry posts, some of whom are joining this effort. We have the good fortune of learning from and building on their efforts. Our gratitude to Matt B, Sue G, David C, John M, Richard L, Doug G, Tony P, Laurence C, Gus B, Christine T, Ruth L, and no doubt many others!*

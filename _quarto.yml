@@ -11,6 +11,7 @@ website:
         text: Home
       - list_print.qmd
       - about.qmd
+      - get_involved.qmd
 
 format:
   html:
